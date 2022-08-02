@@ -1,0 +1,12 @@
+{
+  "name": "API1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts" : {
+    "start" : "node index"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
