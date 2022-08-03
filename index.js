@@ -81,7 +81,7 @@ app.get("/curiosidades", (req, res) => {
     json_final = {
         nome: "Curiosidade",
         foto: "https://static.historiadomundo.com.br/conteudo/images/a-renovacao-saber-historico-abre-caminho-para-outra-relacao-com-passado-53f65ed4b070b.jpg",
-        texto: key,
+        texto: key[0],
         img_curio: img_curio_dinamic
     }
     
