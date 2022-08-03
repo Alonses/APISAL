@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000
 const cantadas = require("./src/base/cantadas.json")
 const jailson = require("./src/base/jailson.json")
 const rasputia = require("./src/base/rasputia.json")
+const textoes = require("./src/base/textoes.json")
 
 let retiradas = []
 let caso = 0 // Redefine o array de retiradas caso altere o valor
@@ -48,14 +49,37 @@ app.get("/rasputia", (req, res) => {
     let json_final = {
         nome: "Rasputia Latimore",
         foto: "https://static.wikia.nocookie.net/antagonists/images/4/40/Rasputia_Latimore.jpg/revision/latest/scale-to-width-down/300?cb=20121110030016",
-        texto: rasputia[escolhe_numero(rasputia, 3)]
+        texto: rasputia[escolhe_numero(rasputia, 2)]
     }
 
     return res.json(json_final)
 })
 
+app.get("/textoes", (req, res) => {
+
+    const num = escolhe_numero(textoes, 3)
+    const key = Object.keys(textoes[num])
+
+    if(textoes[num][key] !== null){
+        json_final = {
+            nome: "Bluezão",
+            foto: "https://pbs.twimg.com/media/CuiC11VXgAAW5Kv.jpg",
+            texto: key.toString(),
+            texto_2: textoes[num][key].toString()
+        }
+    }else{
+        json_final = {
+            nome: "Bluezão",
+            foto: "https://pbs.twimg.com/media/CuiC11VXgAAW5Kv.jpg",
+            texto: key.toString()
+        }
+    }
+    
+    return res.json(json_final)
+})
+
 app.listen(port, () => {
-    console.log("Servidor ligado na porta ", port);
+    console.log("Servidor ligado na porta ", port)
 })
 
 function escolhe_numero(vetor_json, caso_acionado){
