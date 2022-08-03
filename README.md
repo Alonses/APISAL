@@ -5,8 +5,8 @@ A API oficial do Alonsal, usada como base de dados de vários comandos de forma 
 O retorno da mesma é usada em webhooks no Discord, porém pode ser usada de outras formas também<br>
 Seus retornos são `nome`, `foto` e um `texto` como conteúdos dinâmicos, estes, com controle de repetição
 
-URL's ofertadas: <br>
-`/cantadas` - Cantadas do Vai dar Namoro
+URL's ofertadas:
+<br>`/cantadas` - Cantadas do Vai dar Namoro
 <br>`/jailson` - Frases clássicas do Pai da Delícia
 <br>`/rasputia` - Frases da rasputia, tudo numa boa!
 <br>`/textoes` - Frases de shitpost
