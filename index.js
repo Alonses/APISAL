@@ -47,7 +47,7 @@ app.get("/jailson", (req, res) => {
 
 app.get("/rasputia", (req, res) => {
 
-    let nome_wbk = "Rasputia Letimore";
+    let nome_wbk = "Rasputia Latimore";
     let foto_wbk = "https://static.wikia.nocookie.net/antagonists/images/4/40/Rasputia_Latimore.jpg/revision/latest/scale-to-width-down/300?cb=20121110030016";
     let texto_wbk = escolhe_texto(rasputia, 2, 0);
 
@@ -57,7 +57,7 @@ app.get("/rasputia", (req, res) => {
         foto_wbk = "https://m.media-amazon.com/images/S/aplus-media/vc/32d0f854-071e-41ba-b15d-d12e8f5c94a7.__CR0,0,220,220_PT0_SX220_V1___.jpg"
         texto_wbk = texto_wbk.replace("N|", "");
     }
-    
+
     // Frases do Mr. Wong
     if(texto_wbk.startsWith("W|")){
         nome_wbk = "Mr. Wong"
