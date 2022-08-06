@@ -46,12 +46,31 @@ app.get("/jailson", (req, res) => {
 });
 
 app.get("/rasputia", (req, res) => {
-    let json_final = {
-        nome: "Rasputia Latimore",
-        foto: "https://static.wikia.nocookie.net/antagonists/images/4/40/Rasputia_Latimore.jpg/revision/latest/scale-to-width-down/300?cb=20121110030016",
-        texto: escolhe_texto(rasputia, 2, 0)
+
+    let nome_wbk = "Rasputia Letimore";
+    let foto_wbk = "https://static.wikia.nocookie.net/antagonists/images/4/40/Rasputia_Latimore.jpg/revision/latest/scale-to-width-down/300?cb=20121110030016";
+    let texto_wbk = escolhe_texto(rasputia, 2, 0);
+
+    // Frases do Norbit
+    if(texto_wbk.startsWith("N|")){
+        nome_wbk = "Norbit"
+        foto_wbk = "https://m.media-amazon.com/images/S/aplus-media/vc/32d0f854-071e-41ba-b15d-d12e8f5c94a7.__CR0,0,220,220_PT0_SX220_V1___.jpg"
+        texto_wbk = texto_wbk.replace("N|", "");
+    }
+    
+    // Frases do Mr. Wong
+    if(texto_wbk.startsWith("W|")){
+        nome_wbk = "Mr. Wong"
+        foto_wbk = "https://www.personality-database.com/profile_images/342912.png"
+        texto_wbk = texto_wbk.replace("W|", "");
     }
 
+    let json_final = {
+        nome: nome_wbk,
+        foto: foto_wbk,
+        texto: texto_wbk
+    }
+    
     return res.json(json_final)
 })
 
