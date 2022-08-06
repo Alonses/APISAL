@@ -9,9 +9,10 @@ let caso = 0
 class txt_wbk {
     show(req, res){
 
-        const alvo_requisita = req.query.t;
+        // Coleta apenas a key da requisição
+        const alvo_requisita = Object.keys(req.query)[0];
         let nome_wbk, foto_wbk, texto_wbk;
-
+        
         if(alvo_requisita === "rasputia"){
             nome_wbk = "Rasputia Latimore";
             foto_wbk = "https://static.wikia.nocookie.net/antagonists/images/4/40/Rasputia_Latimore.jpg/revision/latest/scale-to-width-down/300?cb=20121110030016";

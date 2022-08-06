@@ -6,14 +6,14 @@ Os retornos são com base em chaves num JSON, e seu conteúdo pode ser facilment
 Seus retornos são `nome`, `foto` e um `texto` (em alguns comandos) com conteúdos dinâmicos, estes, com controle de repetição
 
 URL's ofertadas:
-<br>`/random?t=cantadas` - Cantadas do Vai dar Namoro
-<br>`/random?t=jailson` - Frases clássicas do Pai da Delícia
-<br>`/random?t=rasputia` - Frases da rasputia, tudo numa boa!
-<br>`/random?t=textoes` - Frases de shitpost
+<br>`/random?cantadas` - Cantadas do Vai dar Namoro
+<br>`/random?jailson` - Frases clássicas do Pai da Delícia
+<br>`/random?rasputia` - Frases da rasputia, tudo numa boa!
+<br>`/random?textoes` - Frases de shitpost
 <br>`/curiosidades` - Curiosidades aleatórias
 
 Exemplos de retorno :: <br>
-`apisal.herokuapp.com/random?t=cantadas`
+`apisal.herokuapp.com/random?cantadas`
 
 ```
 {
@@ -25,7 +25,7 @@ Exemplos de retorno :: <br>
 
 <hr>
 
-`apisal.herokuapp.com/random?tjailson`
+`apisal.herokuapp.com/random?jailson`
 
 ```
 {
@@ -46,6 +46,6 @@ Abaixo um outro exemplo de outro campo de retorno
      "nome": "Curiosidade",
      "foto": "url_de_uma_foto_de_capa",
      "texto": "Uma curiosidade aleatória",
-     "img_curio": "url_de_uma_foto_relaciona_a_curiosidade"
+     "img_curio": "url_de_uma_foto_relacionada_a_curiosidade"
 }
 ```
