@@ -49,3 +49,110 @@ Abaixo um outro exemplo de outro campo de retorno
      "img_curio": "url_de_uma_foto_relacionada_a_curiosidade"
 }
 ```
+
+<hr>
+<h2>History</h2>
+
+A URL do History oferta todos os acontecimentos registrados num dia especificado, com a possibilidade
+de receber um acontecimento em uma data especificada, ou na data atual de forma aleatória ou não.<br>
+
+<br>
+Seus paramêtros de entrada podem ser estes `data`, `lang` e `acon`, seus valores padrões são<br>
+respectivamente, `data atual`, `pt-br` e `lista` caso não sejam especificados, abaixo seguem exemplos de uso e retornos esperados:
+
+`apisal.herokuapp.com/history`
+
+Neste caso será enviado uma lista com todos os acontecimentos do dia atual, no idioma pt-br
+
+```
+[
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     },
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     },
+     .
+     .
+     .
+]
+```
+
+<hr>
+
+`apisal.herokuapp.com/history?data=21/01`
+
+Será enviado uma lista com todos os acontecimentos do dia 21/01
+```
+[
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     },
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     },
+     .
+     .
+     .
+]
+```
+
+<hr>
+
+`apisal.herokuapp.com/history?acon=2`
+
+Será retornado o 2° acontecimento da lista de acontecimentos do dia atual
+```
+[
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     }
+]
+```
+
+<hr>
+
+`apisal.herokuapp.com/history?acon=alea`
+
+Será retornado um acontecimento aleatório dos acontecimentos do dia atual
+```
+[
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     }
+]
+```
+
+<hr>
+
+`apisal.herokuapp.com/history?acon=2&data=21/01`
+
+Será retornado o 2° acontecimento da lista de acontecimentos do dia 21/01
+```
+[
+     {
+          "acontecimento": "O titulo do acontecimento",
+          "data_acontecimento": "A data em string",
+          "fonte": "O link para a matéria",
+          "ano": 0000
+     }
+]
+```
