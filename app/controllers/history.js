@@ -101,22 +101,21 @@ function retorna_valores(res, acontecimento){
     
         let num = acontecimento - 1
 
-        if(acontecimento > datas.length || acontecimento < 1) // Número inválido
-            return res.json({status: "404" })
+        if(acontecimento == "alea"){ // Escolhendo um acontecimento aleatório
+
+            if(acontecimentos.length == datas.length) // Limpando os acontecimentos aleatórios
+            acontecimentos = []
+
+            do{
+                num = Math.round(Math.random() * datas.length)
+            }while(acontecimentos.includes(num))
+
+            acontecimentos.push(num)
+        }
 
         fetch(fontes[num])
         .then(response => response.text())
         .then(async res_artigo => {
-
-            if(acontecimento == "alea"){ // Escolhendo um acontecimento aleatório
-
-                if(acontecimentos.length == datas.length) // Limpando os acontecimentos aleatórios
-                acontecimentos = []
-
-                do{
-                    num = Math.round(Math.random() * datas.length)
-                }while(acontecimentos.includes(num))
-            }
 
             // Separando os dados do acontecimento
             let imagem = res_artigo.split("<div class=\"field field--name-field-thumbnail field--type-entity-reference field--label-hidden field--item\">")[1];
@@ -145,6 +144,9 @@ function retorna_valores(res, acontecimento){
             }
 
             return res.json(detalhes_acontecimento)
+        })
+        .catch(() => { // Consulta com erro
+            return res.json({status: "404"})
         })
     }
 }
