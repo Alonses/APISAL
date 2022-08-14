@@ -56,8 +56,8 @@ Abaixo um outro exemplo de outro campo de retorno
 A URL do History oferta todos os acontecimentos registrados num dia especificado, com a possibilidade
 de receber um acontecimento em uma data especificada, ou na data atual de forma aleatória ou não.<br>
 
-<br>
-Seus paramêtros de entrada podem ser estes `data`, `lang` e `acon`, seus valores padrões são<br>
+
+Seus paramêtros de entrada podem ser estes `data`, `lang` e `acon`, seus valores padrões são
 respectivamente, `data atual`, `pt-br` e `lista` caso não sejam especificados, abaixo seguem exemplos de uso e retornos esperados:
 
 `apisal.herokuapp.com/history`
