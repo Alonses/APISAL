@@ -97,40 +97,55 @@ function retorna_valores(res, acontecimento){
         }
         
         return res.json(lista_acontecimentos);
-    }else if(acontecimento == "alea"){
+    }else{
+    
+        let num = acontecimento - 1
 
-        if(acontecimentos.length == datas.length) // Limpando os acontecimentos aleatórios
-            acontecimentos = []
+        if(acontecimento > datas.length || acontecimento < 1) // Número inválido
+            return res.json({status: "404" })
 
-        let num
+        fetch(fontes[num])
+        .then(response => response.text())
+        .then(async res_artigo => {
 
-        do{
-            num = Math.round(Math.random() * datas.length)
-        }while(acontecimentos.includes(num))
-        
-        let acontecimento_aleatorio = {
-            "acontecimento": acontecimento_final[num],
-            "data_acontecimento": datas[num],                
-            "fonte": fontes[num],
-            "ano": ano_materias[num]
-        }
+            if(acontecimento == "alea"){ // Escolhendo um acontecimento aleatório
 
-        return res.json(acontecimento_aleatorio)
+                if(acontecimentos.length == datas.length) // Limpando os acontecimentos aleatórios
+                acontecimentos = []
 
-    }else{ // Acontecimento escolhido
-
-        if(acontecimento < datas.length + 1 && acontecimento > 0){
-
-            let acontecimento_escolhido = {
-                "acontecimento": acontecimento_final[acontecimento - 1],
-                "data_acontecimento": datas[acontecimento - 1],
-                "fonte": fontes[acontecimento - 1],
-                "ano": ano_materias[acontecimento - 1]
+                do{
+                    num = Math.round(Math.random() * datas.length)
+                }while(acontecimentos.includes(num))
             }
 
-            return res.json(acontecimento_escolhido)
-        }else
-            return res.json({status: "404" })
+            // Separando os dados do acontecimento
+            let imagem = res_artigo.split("<div class=\"field field--name-field-thumbnail field--type-entity-reference field--label-hidden field--item\">")[1];
+            imagem = imagem.split("<img src=\"")[1];
+            imagem = imagem.split("\"")[0];
+
+            if(!imagem.includes("https")){ // Imagens com links antigos
+                imagem = imagem.slice(9, imagem.length);
+                imagem = `https://assets.historyplay.tv/br/public${imagem}`;
+            }
+
+            let descricao = res_artigo.split("<div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\">")[1];
+
+            descricao = descricao.split("</p>")[0];
+            descricao = descricao.slice(0, 350) +"...";
+            descricao = descricao.replace("<p>", "");
+            descricao = descricao.replace("<div>", "");
+            
+            let detalhes_acontecimento = {
+                "acontecimento": acontecimento_final[num],
+                "data_acontecimento": datas[num],                
+                "fonte": fontes[num],
+                "ano": ano_materias[num],
+                "descricao": descricao,
+                "imagem": imagem
+            }
+
+            return res.json(detalhes_acontecimento)
+        })
     }
 }
 
