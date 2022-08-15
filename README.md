@@ -115,16 +115,14 @@ Será enviado uma lista com todos os acontecimentos do dia 21/01
 
 Será retornado o 2° acontecimento da lista de acontecimentos do dia atual
 ```
-[
-     {
-          "acontecimento": "O titulo do acontecimento",
-          "data_acontecimento": "A data em string",
-          "fonte": "O link para a matéria",
-          "ano": 0000,
-          "descricao": "Uma descrição do acontecimento",
-          "imagem": "Uma imagem do acontecimento"
-     }
-]
+{
+     "acontecimento": "O titulo do acontecimento",
+     "data_acontecimento": "A data em string",
+     "fonte": "O link para a matéria",
+     "ano": 0000,
+     "descricao": "Uma descrição do acontecimento",
+     "imagem": "Uma imagem do acontecimento"
+}
 ```
 
 <hr>
@@ -133,16 +131,14 @@ Será retornado o 2° acontecimento da lista de acontecimentos do dia atual
 
 Será retornado um acontecimento aleatório dos acontecimentos do dia atual
 ```
-[
-     {
-          "acontecimento": "O titulo do acontecimento",
-          "data_acontecimento": "A data em string",
-          "fonte": "O link para a matéria",
-          "ano": 0000,
-          "descricao": "Uma descrição do acontecimento",
-          "imagem": "Uma imagem do acontecimento"
-     }
-]
+{
+     "acontecimento": "O titulo do acontecimento",
+     "data_acontecimento": "A data em string",
+     "fonte": "O link para a matéria",
+     "ano": 0000,
+     "descricao": "Uma descrição do acontecimento",
+     "imagem": "Uma imagem do acontecimento"
+}
 ```
 
 <hr>
@@ -151,14 +147,12 @@ Será retornado um acontecimento aleatório dos acontecimentos do dia atual
 
 Será retornado o 2° acontecimento da lista de acontecimentos do dia 21/01
 ```
-[
-     {
-          "acontecimento": "O titulo do acontecimento",
-          "data_acontecimento": "A data em string",
-          "fonte": "O link para a matéria",
-          "ano": 0000,
-          "descricao": "Uma descrição do acontecimento",
-          "imagem": "Uma imagem do acontecimento"
-     }
-]
+{
+     "acontecimento": "O titulo do acontecimento",
+     "data_acontecimento": "A data em string",
+     "fonte": "O link para a matéria",
+     "ano": 0000,
+     "descricao": "Uma descrição do acontecimento",
+     "imagem": "Uma imagem do acontecimento"
+}
 ```
