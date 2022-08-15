@@ -1,5 +1,5 @@
 const fetch = (...args) =>
-import('node-fetch').then(({ default: fetch }) => fetch(...args));
+import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 let datas = [], fontes = [], ano_materias = [], acontecimento_final = []
 let acontecimentos = []
@@ -85,7 +85,7 @@ function retorna_valores(res, acontecimento){
 
     if(acontecimento == "lista"){ // Lista de acontecimentos em uma data
         
-        let lista_acontecimentos = [];
+        let lista_acontecimentos = []
 
         for(let i = 0; i < datas.length; i++){
             lista_acontecimentos.push({
@@ -96,7 +96,7 @@ function retorna_valores(res, acontecimento){
             })
         }
         
-        return res.json(lista_acontecimentos);
+        return res.json(lista_acontecimentos)
     }else{
     
         let num = acontecimento - 1
@@ -107,7 +107,7 @@ function retorna_valores(res, acontecimento){
             acontecimentos = []
 
             do{
-                num = Math.round(Math.random() * datas.length)
+                num = Math.round((datas.length - 1) * Math.random())
             }while(acontecimentos.includes(num))
 
             acontecimentos.push(num)
@@ -118,21 +118,21 @@ function retorna_valores(res, acontecimento){
         .then(async res_artigo => {
 
             // Separando os dados do acontecimento
-            let imagem = res_artigo.split("<div class=\"field field--name-field-thumbnail field--type-entity-reference field--label-hidden field--item\">")[1];
-            imagem = imagem.split("<img src=\"")[1];
-            imagem = imagem.split("\"")[0];
+            let imagem = res_artigo.split("<div class=\"field field--name-field-thumbnail field--type-entity-reference field--label-hidden field--item\">")[1]
+            imagem = imagem.split("<img src=\"")[1]
+            imagem = imagem.split("\"")[0]
 
             if(!imagem.includes("https")){ // Imagens com links antigos
-                imagem = imagem.slice(9, imagem.length);
-                imagem = `https://assets.historyplay.tv/br/public${imagem}`;
+                imagem = imagem.slice(9, imagem.length)
+                imagem = `https://assets.historyplay.tv/br/public${imagem}`
             }
 
-            let descricao = res_artigo.split("<div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\">")[1];
+            let descricao = res_artigo.split("<div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\">")[1]
 
-            descricao = descricao.split("</p>")[0];
-            descricao = descricao.slice(0, 350) +"...";
-            descricao = descricao.replace("<p>", "");
-            descricao = descricao.replace("<div>", "");
+            descricao = descricao.split("</p>")[0]
+            descricao = descricao.slice(0, 350) +"..."
+            descricao = descricao.replace("<p>", "")
+            descricao = descricao.replace("<div>", "")
             
             let detalhes_acontecimento = {
                 "acontecimento": acontecimento_final[num],
