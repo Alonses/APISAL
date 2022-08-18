@@ -6,8 +6,9 @@ class Games {
     show(req, res){
         
         if(dados.length < 1){
-            getGames("BR", true).then(dados => {
-                dados = dados.currentGames
+            getGames("BR", true).then(data => {
+                dados = data.currentGames
+                
                 retorna_games(res)
             })
             .catch(err => {
