@@ -24,12 +24,11 @@ class Curiosidades {
 
 function escolhe_texto(vetor_json){
     
-    let num;
+    let num
 
     // Reseta o vetor de repetidas em mudança de comando
-    if(vetor_json.length === retiradas.length){
-        retiradas = [];
-    }
+    if(vetor_json.length === retiradas.length)
+        retiradas = []
 
     do{
         num = Math.round((vetor_json.length - 1) * Math.random())
@@ -37,7 +36,7 @@ function escolhe_texto(vetor_json){
 
     retiradas.push(num)
 
-    return num;
+    return num
 }
 
 module.exports = new Curiosidades()
