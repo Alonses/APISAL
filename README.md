@@ -11,6 +11,7 @@ URL's ofertadas:
 <br>`/random?rasputia` - Frases da rasputia, tudo numa boa!
 <br>`/random?textoes` - Frases de shitpost
 <br>`/curiosidades` - Curiosidades aleatórias
+<br>`/history` - Acontecimentos de uma data
 
 Exemplos de retorno :: <br>
 `apisal.herokuapp.com/random?cantadas`
