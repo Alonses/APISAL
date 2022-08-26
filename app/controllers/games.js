@@ -5,7 +5,14 @@ let dados = []
 class Games {
     show(req, res){
         
-        if(dados.length < 1){
+        // Coletando os parâmetros da requisição
+        const requisicao = req.query
+        let reload = false
+
+        if(requisicao.reload)
+            reload = true
+
+        if(dados.length < 1 || reload){ // Se reload for definido, força o update
             getGames("BR", true).then(data => {
                 dados = data.currentGames
                 
@@ -27,15 +34,20 @@ function retorna_games(res){
     dados.forEach(jogo => {
         array_games.push({
             nome: jogo.title,
+            preco: jogo.price.totalPrice.fmtPrice.originalPrice,
             descricao: jogo.description,
             thumbnail: jogo.keyImages[0].url,
             link: `https://store.epicgames.com/pt-BR/p/${jogo.catalogNs.mappings[0].pageSlug}`,
-            data_inicio: jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10),
-            data_final: jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10)
+            inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
+            expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
         })
     });
 
     return res.json(array_games)
+}
+
+function formata_data(data){
+    return `${data.slice(3, 5)}/${data.slice(0, 2)}`
 }
 
 module.exports = new Games()
