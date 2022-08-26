@@ -32,15 +32,18 @@ function retorna_games(res){
     let array_games = []
     
     dados.forEach(jogo => {
+        
+        let thumbnail_game = jogo.keyImages[0].url
+
         array_games.push({
             nome: jogo.title,
             preco: parseFloat(jogo.price.totalPrice.fmtPrice.originalPrice.replace("R$", "")),
             descricao: jogo.description,
-            thumbnail: `${jogo.keyImages[0].url}.jpg`,
+            thumbnail: thumbnail_game,
             link: `https://store.epicgames.com/pt-BR/p/${jogo.catalogNs.mappings[0].pageSlug}`,
             inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
             expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
-        })    
+        })
     })
 
     return res.json(array_games)
