@@ -1,11 +1,12 @@
 
-const { token_pula } = require('../../config.json')
+// const { token_pula } = require('../../config.json')
 
 class Pula {
     show(req, res){
         
         const requisicao = req.query
-
+        const token_pula = "placholder"
+        
         if(!requisicao.token || requisicao.token !== token_pula) return res.json({status: 404})
 
         const token = gera_token()
@@ -25,7 +26,6 @@ function gera_token(){
     }
     
     return shuffle(randomString.split(''))
-
 }
 
 function shuffle(o) {
