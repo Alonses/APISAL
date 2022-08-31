@@ -2,8 +2,7 @@ class Status {
     show(req, res){
 
         const used = process.memoryUsage()
-        let text = ""
-        
+            
         for (let key in used)
             used[key] = Math.round(used[key] / 1024 / 1024 * 100) / 100
 
