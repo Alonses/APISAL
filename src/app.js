@@ -16,7 +16,9 @@ class App {
             res.header("Access-Controll-Allow-Origin", "*")
             res.header("Access-Controll-Allow-Methods", "Get")
             
-            this.app.use(cors())
+            this.app.use(cors({
+                origin: '*'
+            }))
             next()
         })
     }
