@@ -7,6 +7,7 @@ class App {
         this.app = express()
         this.middlewares()
         this.routes()
+        this.app.options('*', cors())
     }
 
     middlewares() {
