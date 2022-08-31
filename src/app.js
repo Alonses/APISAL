@@ -13,8 +13,10 @@ class App {
         this.app.use(express.json())
 
         this.app.use((req, res, next) => {
+            res.header("Access-Controll-Allow-Credentials", 'true')
             res.header("Access-Controll-Allow-Origin", "*")
-            res.header("Access-Controll-Allow-Methods", "Get")
+            res.header("Access-Controll-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT")
+            res.header("Access-Controll-Allow-Headers", 'X-CSRF-Token, X-Requested-With')
             
             this.app.use(cors({
                 origin: '*'
