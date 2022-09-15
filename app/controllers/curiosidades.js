@@ -2,13 +2,13 @@ const curiosidades = require("../database/curiosidades.json")
 let retiradas = []
 
 class Curiosidades {
-    show(req, res){
+    show(req, res) {
         let num = escolhe_texto(curiosidades, 4, 0)
         const key = Object.keys(curiosidades[num])
 
         let img_curio_dinamic = null
 
-        if(curiosidades[num][key] !== null)
+        if (curiosidades[num][key] !== null)
             img_curio_dinamic = curiosidades[num][key].toString()
 
         let json_final = {
@@ -17,22 +17,22 @@ class Curiosidades {
             texto: key[0],
             img_curio: img_curio_dinamic
         }
-    
+
         return res.json(json_final)
     }
 }
 
-function escolhe_texto(vetor_json){
-    
+function escolhe_texto(vetor_json) {
+
     let num
 
     // Reseta o vetor de repetidas em mudança de comando
-    if(vetor_json.length === retiradas.length)
+    if (vetor_json.length === retiradas.length)
         retiradas = []
 
-    do{
+    do {
         num = Math.round((vetor_json.length - 1) * Math.random())
-    }while(retiradas.includes(num))
+    } while (retiradas.includes(num))
 
     retiradas.push(num)
 

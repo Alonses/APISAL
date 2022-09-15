@@ -18,7 +18,7 @@ class App {
             res.header("Access-Control-Allow-Origin", "*")
             res.header("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT")
             res.header("Access-Control-Allow-Headers", 'X-CSRF-Token, X-Requested-With')
-            
+
             this.app.use(cors({
                 origin: '*'
             }))
