@@ -1,6 +1,6 @@
 
 // const { token_pula } = require('../../config.json')
-const { existsSync, writeFileSync, readdirSync } = require('fs')
+const { existsSync, writeFileSync } = require('fs')
 
 class Pula {
     show(req, res) {
@@ -44,12 +44,10 @@ function new_user(res) {
     return res.json({ status: "Ok", token: token })
 }
 
-function sincronizar(res) {
+function sincronizar(res, requisicao) {
 
-    const token = res.token_user
-
-    if (existsSync(`./data/pula/${token.slice(0, 5)}.json`)) {
-        const data = require(`../../data/pula/${token.slice(0, 5)}.json`)
+    if (existsSync(`./data/pula/${requisicao.token_user.slice(0, 5)}.json`)) {
+        const data = require(`../../data/pula/${requisicao.token_user.slice(0, 5)}.json`)
 
         return res.json({ data: data })
     } else
