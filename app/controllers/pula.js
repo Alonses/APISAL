@@ -14,10 +14,10 @@ class Pula {
             return new_user(res)
 
         if (requisicao.sync)
-            return sincronizar(res)
+            return sincronizar(res, requisicao)
 
         if (requisicao.save)
-            return salvar_dados(res)
+            return salvar_dados(res, requisicao)
 
         return res.json({ status: 200 })
     }
@@ -32,9 +32,10 @@ function new_user(res) {
     } while (existsSync(`./data/pula/${token.slice(0, 5)}.json`))
 
     const data = {
-        money: null,
-        pulos: null,
-        mortes: null
+        token_user: token,
+        money: 0,
+        pulos: 0,
+        mortes: 0
     }
 
     writeFileSync(`./data/pula/${token.slice(0, 5)}.json`, JSON.stringify(data))
@@ -55,13 +56,13 @@ function sincronizar(res) {
         return res.json({ status: 404 })
 }
 
-function salvar_dados(res) {
+function salvar_dados(res, requisicao) {
 
-    const token = res.token_user
+    if (existsSync(`./data/pula/${requisicao.token_user.slice(0, 5)}.json`)) {
 
-    if (existsSync(`./data/pula/${token.slice(0, 5)}.json`)) {
-
-        console.log(res.data)
+        // Salvando os dados no json do usuário
+        writeFileSync(`./data/pula/${requisicao.token_user.slice(0, 5)}.json`, requisicao.data)
+        delete require.cache[require.resolve(`../../data/pula/${requisicao.token_user.slice(0, 5)}.json`)]
 
         return res.json({ status: 200 })
     } else
