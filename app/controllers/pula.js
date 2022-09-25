@@ -13,6 +13,9 @@ class Pula {
         if (requisicao.new)
             return new_user(res)
 
+        if (requisicao.check)
+            return check_user(res, requisicao)
+
         if (requisicao.sync)
             return sincronizar(res, requisicao)
 
@@ -32,10 +35,7 @@ function new_user(res) {
     } while (existsSync(`./data/pula/${token.slice(0, 5)}.json`))
 
     const data = {
-        token_user: token,
-        money: 0,
-        pulos: 0,
-        mortes: 0
+        sync: 0
     }
 
     writeFileSync(`./data/pula/${token.slice(0, 5)}.json`, JSON.stringify(data))
@@ -44,8 +44,16 @@ function new_user(res) {
     return res.json({ status: "Ok", token: token })
 }
 
-function sincronizar(res, requisicao) {
+function check_user(res, requisicao) {
+    // Verifica se o usuário existe
+    if (existsSync(`./data/pula/${requisicao.token_user.slice(0, 5)}.json`))
+        return res.json({ status: 200 })
+    else
+        return res.json({ status: 404 })
+}
 
+function sincronizar(res, requisicao) {
+    // Envia os dados do usuário informado
     if (existsSync(`./data/pula/${requisicao.token_user.slice(0, 5)}.json`)) {
         const data = require(`../../data/pula/${requisicao.token_user.slice(0, 5)}.json`)
 
