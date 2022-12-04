@@ -14,7 +14,7 @@ URL's ofertadas:
 <br>`/history` - Acontecimentos de uma data
 
 Exemplos de retorno :: <br>
-`apisal.herokuapp.com/random?cantadas`
+`{url_api}/random?cantadas`
 
 ```
 {
@@ -26,7 +26,7 @@ Exemplos de retorno :: <br>
 
 <hr>
 
-`apisal.herokuapp.com/random?jailson`
+`{url_api}/random?jailson`
 
 ```
 {
@@ -40,7 +40,7 @@ Exemplos de retorno :: <br>
 
 Abaixo um outro exemplo de outro campo de retorno
 
-`apisal.herokuapp.com/curiosidades`
+`{url_api}/curiosidades`
 
 ```
 {
@@ -61,7 +61,7 @@ de receber um acontecimento em uma data especificada, ou na data atual de forma 
 Seus paramêtros de entrada podem ser estes `data`, `lang` e `acon`, seus valores padrões são
 respectivamente, `data atual`, `pt-br` e `lista` caso não sejam especificados, abaixo seguem exemplos de uso e retornos esperados:
 
-`apisal.herokuapp.com/history`
+`{url_api}/history`
 
 Neste caso será enviado uma lista com todos os acontecimentos do dia atual, no idioma pt-br
 
@@ -87,7 +87,7 @@ Neste caso será enviado uma lista com todos os acontecimentos do dia atual, no 
 
 <hr>
 
-`apisal.herokuapp.com/history?data=21/01`
+`{url_api}/history?data=21/01`
 
 Será enviado uma lista com todos os acontecimentos do dia 21/01
 ```
@@ -112,7 +112,7 @@ Será enviado uma lista com todos os acontecimentos do dia 21/01
 
 <hr>
 
-`apisal.herokuapp.com/history?acon=2`
+`{url_api}/history?acon=2`
 
 Será retornado o 2° acontecimento da lista de acontecimentos do dia atual
 ```
@@ -128,7 +128,7 @@ Será retornado o 2° acontecimento da lista de acontecimentos do dia atual
 
 <hr>
 
-`apisal.herokuapp.com/history?acon=alea`
+`{url_api}/history?acon=alea`
 
 Será retornado um acontecimento aleatório dos acontecimentos do dia atual
 ```
@@ -144,7 +144,7 @@ Será retornado um acontecimento aleatório dos acontecimentos do dia atual
 
 <hr>
 
-`apisal.herokuapp.com/history?acon=2&data=21/01`
+`{url_api}/history?acon=2&data=21/01`
 
 Será retornado o 2° acontecimento da lista de acontecimentos do dia 21/01
 ```
