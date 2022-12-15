@@ -29,24 +29,28 @@ class Games {
 
 function retorna_games(res) {
 
-    let array_games = []
+    try {
+        let array_games = []
 
-    dados.forEach(jogo => {
+        dados.forEach(jogo => {
 
-        let thumbnail_game = jogo.keyImages[0].url
+            let thumbnail_game = jogo.keyImages[1].url
 
-        array_games.push({
-            nome: jogo.title,
-            preco: parseFloat(jogo.price.totalPrice.fmtPrice.originalPrice.replace("R$", "")),
-            descricao: jogo.description,
-            thumbnail: thumbnail_game,
-            link: `https://store.epicgames.com/pt-BR/p/${jogo.catalogNs.mappings[0].pageSlug}`,
-            inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
-            expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
+            array_games.push({
+                nome: jogo.title,
+                preco: parseFloat(jogo.price.totalPrice.fmtPrice.originalPrice.replace("R$", "")),
+                descricao: jogo.description,
+                thumbnail: thumbnail_game,
+                link: `https://store.epicgames.com/pt-BR/p/${jogo.customAttributes[4].value}`,
+                inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
+                expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
+            })
         })
-    })
 
-    return res.json(array_games)
+        return res.json(array_games)
+    } catch (err) {
+        return res.json({ status: 501 })
+    }
 }
 
 function formata_data(data) {
