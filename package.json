@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon test"
+    "test": "nodemon test"
   },
   "license": "MIT",
   "dependencies": {
