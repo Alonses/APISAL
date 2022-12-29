@@ -34,14 +34,20 @@ function retorna_games(res) {
 
         dados.forEach(jogo => {
 
-            let thumbnail_game = jogo.keyImages[1].url
+            let thumbnail_game = jogo.keyImages[0].url, url_game
+
+            try {
+                url_game = jogo.catalogNs.mappings[0].pageSlug
+            } catch (err) {
+                url_game = jogo.customAttributes[4].value
+            }
 
             array_games.push({
                 nome: jogo.title,
                 preco: parseFloat(jogo.price.totalPrice.fmtPrice.originalPrice.replace("R$", "")),
                 descricao: jogo.description,
                 thumbnail: thumbnail_game,
-                link: `https://store.epicgames.com/pt-BR/p/${jogo.customAttributes[4].value}`,
+                link: `https://store.epicgames.com/pt-BR/p/${url_game}`,
                 inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
                 expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
             })
