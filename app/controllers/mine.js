@@ -93,6 +93,8 @@ class Mine {
 
                     i++
                 }
+
+                return res.json({ status: 404 })
             })
             .catch(err => {
                 console.log(err)
@@ -107,18 +109,18 @@ function formata_descricao(dados_item, idioma, nome_interno) {
 
     if (dados_item.description[0].value.includes("[&")) { // Poções
 
-        let nome_item = dados_item.name, descricao_tipo = ''
+        let nome_item = dados_item.name
         valores_item = dados_item.description[0].value
 
         valores_item = valores_item.replace("[&s[&3Efeito aplicado: ", "")
         valores_item = valores_item.replaceAll(") ", ")")
         valores_item = valores_item.replace("[&s[&r", "\n")
         valores_item = valores_item.replace("&s[&r", "\n")
-        valores_item = valores_item.replaceAll("[&1", "\n")
-        valores_item = valores_item.replaceAll("[&2", "\n")
+
+        for (let i = 1; i < 4; i++)
+            valores_item = valores_item.replaceAll(`[&${i}`, "\n")
+
         valores_item = valores_item.replaceAll("&2", "\n")
-        valores_item = valores_item.replaceAll("[&4", "\n")
-        valores_item = valores_item.replaceAll("[&3", "\n")
         valores_item = valores_item.replaceAll("&r", "")
         valores_item = valores_item.substr(1)
 
