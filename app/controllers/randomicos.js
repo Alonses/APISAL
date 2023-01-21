@@ -1,12 +1,12 @@
-const rasputia = require("../database/rasputia.json")
 const jailson = require("../database/jailson.json")
 const textoes = require("../database/textoes.json")
 const cantadas = require("../database/cantadas.json")
+const rasputia = require("../database/rasputia.json")
 
 let retiradas = []
 let caso = 0
 
-class txt_wbk {
+class Randomicos {
     show(req, res) {
 
         // Coleta apenas a key da requisição
@@ -95,4 +95,4 @@ function escolhe_texto(vetor_json, caso_acionado, alvo) {
     return texto_completo
 }
 
-module.exports = new txt_wbk()
+module.exports = new Randomicos()

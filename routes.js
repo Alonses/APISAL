@@ -1,7 +1,7 @@
 const { Router } = require("express")
 
-const Comandos = require('./app/controllers/comandos')
-const txt_wbk = require('./app/controllers/txt_wbk')
+const Mine = require('./app/controllers/mine')
+const Randomicos = require('./app/controllers/randomicos')
 const Curiosidades = require('./app/controllers/curiosidades')
 const History = require('./app/controllers/history')
 const Games = require("./app/controllers/games")
@@ -10,8 +10,8 @@ const Pula = require("./app/controllers/pula")
 
 const routes = new Router()
 
-routes.get('/comandos', Comandos.show)
-routes.get('/random', txt_wbk.show)
+routes.get('/mine', Mine.show)
+routes.get('/random', Randomicos.show)
 routes.get('/curiosidades', Curiosidades.show)
 routes.get('/history', History.show)
 routes.get('/games', Games.show)

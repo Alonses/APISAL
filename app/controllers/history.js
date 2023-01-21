@@ -31,15 +31,13 @@ class History {
         if (requisicao.acon)
             acontecimento = requisicao.acon
 
-        const url_completa = `https://history.uol.com.br/hoje-na-historia/${data}`
-
         if (acontecimento_final.length < 1 || data !== data_anterior) {
 
             // Limpando os dados anteriores
             datas = [], fontes = [], ano_materias = [], acontecimento_final = []
             acontecimentos = []
 
-            fetch(url_completa)
+            fetch(`https://history.uol.com.br/hoje-na-historia/${data}`)
                 .then(response => response.text())
                 .then(async resultados => {
 
