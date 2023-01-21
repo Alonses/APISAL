@@ -84,11 +84,11 @@ class Mine {
                             })
 
                         if (descricao_item.length > 0 && lista_itens[i].durability)
-                            return res.json({ name: lista_itens[i].name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide, durability: lista_itens[i].durability[0].value }, description: descricao_item, wiki: descricao_item_wiki })
+                            return res.json({ name: lista_itens[i].name, internal_name: lista_itens[i].internal_name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide, durability: lista_itens[i].durability[0].value }, description: descricao_item, wiki: descricao_item_wiki })
                         else if (descricao_item.length > 0)
-                            return res.json({ name: lista_itens[i].name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide }, description: descricao_item, wiki: descricao_item_wiki })
+                            return res.json({ name: lista_itens[i].name, internal_name: lista_itens[i].internal_name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide }, description: descricao_item, wiki: descricao_item_wiki })
                         else
-                            return res.json({ name: lista_itens[i].name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide }, wiki: descricao_item_wiki })
+                            return res.json({ name: lista_itens[i].name, internal_name: lista_itens[i].internal_name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide }, wiki: descricao_item_wiki })
                     }
 
                     i++
