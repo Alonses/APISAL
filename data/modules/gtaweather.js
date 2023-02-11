@@ -3,8 +3,9 @@ const gameHourLength = 120; // 1 in-game hour in seconds
 const sunriseTime = 6;   // Time of sunset and sunrise, as in-game hour of day
 const sunsetTime = 21;
 
-function makeWeather(name_, emoji_, thumbnailDay_, thumbnailNight_) {
+function makeWeather(id_, name_, emoji_, thumbnailDay_, thumbnailNight_) {
     return {
+        id: id_,
         name: name_,
         emoji: emoji_,
         thumbnailDay: thumbnailDay_,
@@ -14,17 +15,17 @@ function makeWeather(name_, emoji_, thumbnailDay_, thumbnailNight_) {
 
 // Weather states
 const weatherState = {
-    clear: makeWeather("Clear", "☀️", "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
-    rain: makeWeather("Raining", "🌧", "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
-    drizzle: makeWeather("Drizzling", "🌦", "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
-    mist: makeWeather("Misty", "🌁", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-    fog: makeWeather("Foggy", "🌫", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-    haze: makeWeather("Hazy", "🌫", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-    snow: makeWeather("Snowy", "❄️", "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
-    cloudy: makeWeather("Cloudy", "☁️", "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
-    mostlyCloudy: makeWeather("Mostly cloudy", "🌥", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
-    partlyCloudy: makeWeather("Partly cloudy", "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"), // Emoji could be wrong
-    mostlyClear: makeWeather("Mostly clear", "🌤", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
+    clear: makeWeather(0, "Clear", "☀️", "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
+    rain: makeWeather(1, "Raining", "🌧️", "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
+    drizzle: makeWeather(2, "Drizzling", "🌧️", "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
+    mist: makeWeather(3, "Misty", "🌁", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+    fog: makeWeather(4, "Foggy", "🌫️", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+    haze: makeWeather(5, "Hazy", "🌫️", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+    snow: makeWeather(6, "Snowy", "❄️", "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
+    cloudy: makeWeather(7, "Cloudy", "☁️", "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
+    mostlyCloudy: makeWeather(7, "Mostly cloudy", "☁️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
+    partlyCloudy: makeWeather(8, "Partly cloudy", "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"), // Emoji could be wrong
+    mostlyClear: makeWeather(9, "Mostly clear", "🌤️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
 };
 
 // Weather lookup table
@@ -88,7 +89,7 @@ const weatherStateChanges = [
 
 // Return type for GetForecast()
 class GTAWeatherState {
-    constructor(description, thumbnailURL, gameTimeHrs, gameTimeStr, currentWeatherEmoji, currentWeatherDescription, rainEtaSec, rainEtaStr, isRaining) {
+    constructor(description, thumbnailURL, gameTimeHrs, gameTimeStr, currentWeatherID, currentWeatherEmoji, currentWeatherDescription, rainEtaSec, rainEtaStr, isRaining) {
         /**
          * Describes the time/date the forecast is for (formatted for Discord!)
          * @type {string}
@@ -109,6 +110,11 @@ class GTAWeatherState {
          * @type {string}
          */
         this.gameTimeStr = gameTimeStr;
+        /**
+         * ID of the weather condition
+         * @type {number}
+         */
+        this.currentWeatherID = currentWeatherID;
         /**
          * Emoji showing the weather
          * @type {string}
@@ -173,7 +179,7 @@ function dateToStr(d) {
     var m = d.getUTCMinutes().toString().padStart(2, "0");
     var S = d.getUTCSeconds().toString().padStart(2, "0");
 
-    return D + " " + M + " " + Y + " " + H + ":" + m + ":" + S + " UTC";
+    return `${D} ${M} ${Y} ${H}:${m}:${S} UTC`;
 }
 
 function getGtaTimeFromDate(d) {
@@ -262,6 +268,7 @@ module.exports = {
             (isDaytime(gtaTime.gameTimeHrs) ? currentWeather.thumbnailDay : currentWeather.thumbnailNight),
             gtaTime.gameTimeHrs,
             gtaTime.gameTimeStr,
+            currentWeather.id,
             currentWeather.emoji,
             currentWeather.name,
             rainEta.etaSec,

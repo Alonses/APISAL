@@ -59,7 +59,6 @@ class Mine {
                         let tipo = lista_itens[i].type.charAt(0).toUpperCase() + lista_itens[i].type.slice(1)
                         url_icon = `https://raw.githubusercontent.com/odnols/inventario-mine/main/IMG/Itens/new/${tipo}/${lista_itens[i].icon}`
 
-                        console.log(lista_itens[i])
                         objeto_encontrado = true
 
                         if (lista_itens[i].description)
