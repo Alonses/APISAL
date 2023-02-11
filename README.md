@@ -52,7 +52,9 @@ Abaixo um outro exemplo de outro campo de retorno
 ```
 
 <hr>
-<h2>History</h2>
+<h2>Fontes de terceiros</h2>
+
+<h3><a href="https://history.uol.com.br/hoje-na-historia">History</a></h3>
 
 A URL do History oferta todos os acontecimentos registrados num dia especificado, com a possibilidade
 de receber um acontecimento em uma data especificada, ou na data atual de forma aleatória ou não.<br>
@@ -157,3 +159,12 @@ Será retornado o 2° acontecimento da lista de acontecimentos do dia 21/01
      "imagem": "Uma imagem do acontecimento"
 }
 ```
+
+<hr>
+<h3><a href="https://github.com/adam10603/GTAWeather">GTAWeather</a></h3>
+
+O código desenvolvido por <a href="https://github.com/adam10603">adam10603</a> e Pardonias é utilizado para oferecer dados sobre o mundo online do GTA 5.<br><br>
+
+Graças a mente criativa e a disponibilização do código públicamente, <br>
+é possível unificarmos e somarmos forças na criação de ferramentas úteis para todos!<br>
+Obrigado pessoal!
