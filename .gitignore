@@ -1,6 +1,0 @@
-node_modules
-yarn.lock
-config.json
-data/pula/*
-!data/pula/.gitkeep
-a.zip
