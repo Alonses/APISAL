@@ -6,19 +6,17 @@ class Curiosidades {
         let num = escolhe_texto(curiosidades, 4, 0)
         const key = Object.keys(curiosidades[num])
 
-        let img_curio_dinamic = null
+        let data_curio = null
 
         if (curiosidades[num][key] !== null)
-            img_curio_dinamic = curiosidades[num][key].toString()
+            data_curio = curiosidades[num][key].toString()
 
-        let json_final = {
-            nome: "Curiosidade",
-            foto: "https://static.historiadomundo.com.br/conteudo/images/a-renovacao-saber-historico-abre-caminho-para-outra-relacao-com-passado-53f65ed4b070b.jpg",
+        const dados = {
             texto: key[0],
-            img_curio: img_curio_dinamic
+            data_curio: data_curio
         }
 
-        return res.json(json_final)
+        return res.json(dados)
     }
 }
 
