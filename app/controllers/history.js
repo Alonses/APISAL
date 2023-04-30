@@ -116,14 +116,8 @@ function retorna_valores(res, acontecimento) {
             .then(async res_artigo => {
 
                 // Separando os dados do acontecimento
-                let imagem = res_artigo.split("<div class=\"field field--name-field-thumbnail field--type-entity-reference field--label-hidden field--item\">")[1]
-                imagem = imagem.split("<img src=\"")[1]
-                imagem = imagem.split("\"")[0]
-
-                if (!imagem.includes("https")) { // Imagens com links antigos
-                    imagem = imagem.slice(9, imagem.length)
-                    imagem = `https://assets.historyplay.tv/br/public${imagem}`
-                }
+                let imagem = res_artigo.split("\"image\":{\"@type\":\"ImageObject\",\"url\":\"")[1]
+                imagem = imagem.split("\"},\"datePublished\":\"")[0]
 
                 let descricao = res_artigo.split("<div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\">")[1]
 
