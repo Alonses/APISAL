@@ -1,6 +1,10 @@
+require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
 const routes = require('./routes')
+
+const database = require('./app/database/database')
 
 class App {
     constructor() {
@@ -30,5 +34,7 @@ class App {
         this.app.use(routes)
     }
 }
+
+database.setup(process.env.url_dburi)
 
 module.exports = new App().app

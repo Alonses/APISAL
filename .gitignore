@@ -4,3 +4,4 @@ config.json
 data/pula/*
 !data/pula/.gitkeep
 a.zip
+.env

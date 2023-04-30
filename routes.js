@@ -8,6 +8,7 @@ const Games = require("./app/controllers/games")
 const Status = require("./app/controllers/status")
 const Pula = require("./app/controllers/pula")
 const GtaWeather = require("./app/controllers/gtaweather")
+const Charadas = require('./app/controllers/charadas')
 
 const routes = new Router()
 
@@ -19,5 +20,6 @@ routes.get('/games', Games.show)
 routes.get('/status', Status.show)
 routes.get('/pula', Pula.show)
 routes.get('/gta', GtaWeather.show)
+routes.get('/charadas', Charadas.show)
 
 module.exports = routes
