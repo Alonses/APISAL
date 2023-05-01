@@ -17,7 +17,7 @@ class History {
             dia = data.getDate()
             mes = data.getMonth() + 1
 
-            data = `${data.getDate()}/${("0" + (data.getMonth() + 1)).substr(-2)}`
+            data = `${("0" + (data.getDate())).substr(-2)}/${("0" + (data.getMonth() + 1)).substr(-2)}`
         } else {
             data = requisicao.data
             dia = data.slice(0, 2)
