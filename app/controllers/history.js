@@ -55,6 +55,7 @@ class History {
                         let link_materia = alvos[i].split("hreflang=\"pt-br\">")[0]
                         link_materia = link_materia.split("<a href=\"")[1]
                         link_materia = link_materia.replace("\"", "")
+                        link_materia = link_materia.replace(" ", "")
 
                         if (idioma_definido === "pt-br")
                             datas.push(`${dia}/${("0" + mes).substr(-2)}, ${ano_materia}`)
@@ -81,7 +82,7 @@ class History {
 // Retorna os eventos ou o evento personalizado escolhido
 function retorna_valores(res, acontecimento) {
 
-    if (acontecimento == "lista") { // Lista de acontecimentos em uma data
+    if (acontecimento === "lista") { // Lista de acontecimentos em uma data
 
         let lista_acontecimentos = []
 
@@ -99,7 +100,7 @@ function retorna_valores(res, acontecimento) {
 
         let num = acontecimento - 1
 
-        if (acontecimento == "alea") { // Escolhendo um acontecimento aleatório
+        if (acontecimento === "alea") { // Escolhendo um acontecimento aleatório
 
             if (acontecimentos.length == datas.length) // Limpando os acontecimentos aleatórios
                 acontecimentos = []
