@@ -17,10 +17,10 @@ class Mine {
         const nome_interno = pesquisa_crua.split(" ").join("_").toLocaleLowerCase()
         const random = pesquisa_crua === ""
 
-        fetch('https://raw.githubusercontent.com/odnols/inventario-mine/main/Files/JSON/dados_locais.json')
+        fetch('https://raw.githubusercontent.com/odnols/inventario-mine/main/files/JSON/dados_locais.json')
             .then(response => response.json())
             .then(async lista_itens => {
-                let descr_pesquisa, alvo, alvo_json, pesquisa
+                let descr_pesquisa, pesquisa
 
                 while (i < lista_itens.length && !objeto_encontrado) {
 
@@ -57,7 +57,7 @@ class Mine {
                             i = Math.round((lista_itens.length - 1) * Math.random())
 
                         let tipo = lista_itens[i].type.charAt(0).toUpperCase() + lista_itens[i].type.slice(1)
-                        url_icon = `https://raw.githubusercontent.com/odnols/inventario-mine/main/IMG/Itens/new/${tipo}/${lista_itens[i].icon}`
+                        url_icon = `https://raw.githubusercontent.com/odnols/inventario-mine/main/img/itens/new/${tipo}/${lista_itens[i].icon}`
 
                         objeto_encontrado = true
 
