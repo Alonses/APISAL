@@ -56,8 +56,7 @@ class Mine {
                         if (random && !objeto_encontrado)
                             i = Math.round((lista_itens.length - 1) * Math.random())
 
-                        let tipo = lista_itens[i].type.charAt(0).toUpperCase() + lista_itens[i].type.slice(1)
-                        url_icon = `https://raw.githubusercontent.com/odnols/inventario-mine/main/img/itens/new/${tipo}/${lista_itens[i].icon}`
+                        url_icon = `https://raw.githubusercontent.com/odnols/inventario-mine/main/img/itens/new/${lista_itens[i].type}/${lista_itens[i].icon}`
 
                         objeto_encontrado = true
 
