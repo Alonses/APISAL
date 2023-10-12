@@ -10,7 +10,7 @@ class History {
 
         // Coletando os parâmetros da requisição
         const requisicao = req.query
-        let data, dia, mes, idioma_definido = "pt-br", acontecimento = "lista"
+        let data, dia, mes, idioma_definido = requisicao.lang || "pt-br", acontecimento = "lista"
 
         if (!requisicao.data) {
             data = new Date()
@@ -25,9 +25,6 @@ class History {
         }
 
         // Organizando os parâmetros
-        if (requisicao.lang)
-            idioma_definido = requisicao.lang
-
         if (requisicao.acon)
             acontecimento = requisicao.acon
 

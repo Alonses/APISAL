@@ -1,4 +1,4 @@
-const { getGames } = require("epic-free-games")
+const { EpicFreeGames } = require("epic-free-games")
 
 let dados = []
 
@@ -13,13 +13,14 @@ class Games {
             reload = true
 
         if (dados.length < 1 || reload) { // Se reload for definido, força o update
-            getGames("BR", true).then(data => {
+            const epicFreeGames = new EpicFreeGames({ country: 'BR', locale: 'pt-BR', includeAll: true })
+
+            epicFreeGames.getGames().then(data => {
                 dados = data.currentGames
 
                 retorna_games(res)
             })
-                .catch(err => {
-                    console.log(err)
+                .catch(() => {
                     return res.json({ status: "404" })
                 })
         } else
@@ -34,20 +35,22 @@ function retorna_games(res) {
 
         dados.forEach(jogo => {
 
-            let thumbnail_game = jogo.keyImages[0].url, url_game
+            let thumbnail_game = jogo.keyImages[0].url
 
-            try {
-                url_game = jogo.catalogNs.mappings[0].pageSlug
-            } catch (err) {
-                url_game = jogo.customAttributes[4].value
-            }
+            let tipo_conteudo = jogo.categories[0]["path"] === "bundles" ? "bundles" : "p"
+            const url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.urlSlug}`
+
+            let preco = `${jogo.price.totalPrice.originalPrice}`
+
+            if (preco.length > 2) // Formatando o preço
+                preco = parseFloat(preco.substr(0, preco.length - 2) + "." + preco.substr(preco.length - 2, preco.length))
 
             array_games.push({
                 nome: jogo.title,
-                preco: parseFloat(jogo.price.totalPrice.fmtPrice.originalPrice.replace("R$", "")),
+                preco: preco,
                 descricao: jogo.description,
                 thumbnail: thumbnail_game,
-                link: `https://store.epicgames.com/pt-BR/p/${url_game}`,
+                link: url_game,
                 inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
                 expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
             })

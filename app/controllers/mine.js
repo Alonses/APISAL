@@ -95,8 +95,7 @@ class Mine {
 
                 return res.json({ status: 404 })
             })
-            .catch(err => {
-                console.log(err)
+            .catch(() => {
                 return res.json({ status: 502 })
             })
     }
