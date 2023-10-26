@@ -38,7 +38,10 @@ function retorna_games(res) {
             let thumbnail_game = jogo.keyImages[0].url
 
             let tipo_conteudo = jogo.categories[0]["path"] === "bundles" ? "bundles" : "p"
-            const url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.urlSlug}`
+            let url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.urlSlug}`
+
+            if (jogo.offerMappings.length > 0) // Jogo com url especificada em outra chave ( parte de um pacote )
+                url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.offerMappings[0].pageSlug}`
 
             let preco = `${jogo.price.totalPrice.originalPrice}`
 
