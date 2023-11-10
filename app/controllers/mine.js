@@ -70,7 +70,7 @@ class Mine {
                         let nome_wiki = idioma_definido == "pt-br" ? lista_itens[i].name : lista_itens[i].internal_name;
 
                         // Procurando na wiki sobre a pesquisa
-                        await fetch(`https://minecraft.fandom.com/${idioma_definido.slice(0, 2)}/wiki/${nome_wiki}`)
+                        await fetch(`https://${idioma_definido.slice(0, 2)}.minecraft.wiki/w/${nome_wiki}`)
                             .then(response => response.text())
                             .then(async res => {
 
@@ -82,12 +82,37 @@ class Mine {
                                 }
                             })
 
+                        const obj = {
+                            name: lista_itens[i].name,
+                            internal_name: lista_itens[i].internal_name,
+                            icon: url_icon,
+                            stats: {
+                                version: lista_itens[i].version,
+                                collectable: lista_itens[i].collectable,
+                                renewable: lista_itens[i].renewable,
+                                stackable: lista_itens[i].stackable,
+                                craftable: lista_itens[i].renewable,
+                                type: lista_itens[i].type,
+                                hide: lista_itens[i].hide
+                            },
+                            wiki: {
+                                link: null,
+                                descricao: null
+                            }
+                        }
+
+                        if (descricao_item_wiki.length > 0) {
+                            obj.wiki.link = `https://${idioma_definido.slice(0, 2)}.minecraft.wiki/${nome_wiki}`
+                            obj.wiki.descricao = descricao_item_wiki
+                        }
+
+                        if (descricao_item.length > 0)
+                            obj.description = descricao_item
+
                         if (descricao_item.length > 0 && lista_itens[i].durability)
-                            return res.json({ name: lista_itens[i].name, internal_name: lista_itens[i].internal_name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide, durability: lista_itens[i].durability[0].value }, description: descricao_item, wiki: descricao_item_wiki })
-                        else if (descricao_item.length > 0)
-                            return res.json({ name: lista_itens[i].name, internal_name: lista_itens[i].internal_name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide }, description: descricao_item, wiki: descricao_item_wiki })
-                        else
-                            return res.json({ name: lista_itens[i].name, internal_name: lista_itens[i].internal_name, icon: url_icon, stats: { version: lista_itens[i].version, collectable: lista_itens[i].collectable, renewable: lista_itens[i].renewable, stackable: lista_itens[i].stackable, craftable: lista_itens[i].renewable, type: lista_itens[i].type, hide: lista_itens[i].hide }, wiki: descricao_item_wiki })
+                            obj.durability = lista_itens[i].durability[0].value
+
+                        return res.json(obj)
                     }
 
                     i++
