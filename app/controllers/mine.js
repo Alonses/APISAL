@@ -102,7 +102,7 @@ class Mine {
                         }
 
                         if (descricao_item_wiki.length > 0) {
-                            obj.wiki.link = `https://${idioma_definido.slice(0, 2)}.minecraft.wiki/${nome_wiki.replaceAll(" ", "_")}`
+                            obj.wiki.link = `https://${idioma_definido.slice(0, 2)}.minecraft.wiki/w/${nome_wiki.replaceAll(" ", "_")}`
                             obj.wiki.descricao = descricao_item_wiki
                         }
 

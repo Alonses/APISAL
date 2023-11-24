@@ -43,6 +43,13 @@ function retorna_games(res) {
             if (jogo.offerMappings.length > 0) // Jogo com url especificada em outra chave ( parte de um pacote )
                 url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.offerMappings[0].pageSlug}`
 
+            // Buscando a URL do game
+            if (jogo.customAttributes.length > 0)
+                Object.keys(jogo.customAttributes).forEach(indice => {
+                    if (jogo.customAttributes[indice].key === "com.epicgames.app.productSlug")
+                        url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.customAttributes[indice].value}`
+                })
+
             let preco = `${jogo.price.totalPrice.originalPrice}`
 
             if (preco.length > 2) // Formatando o preço
