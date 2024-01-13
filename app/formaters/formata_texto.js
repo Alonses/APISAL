@@ -15,7 +15,8 @@ const cases = {
     "&#8204;": "",
     "<p class=\"truncate-text\"> ": "",
     "<span class=\"truncated-text\">": "",
-    "; \"": ""
+    "; \"": "",
+    "&#39;": "'"
 }
 
 module.exports = (string) => {
