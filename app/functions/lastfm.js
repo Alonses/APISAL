@@ -83,6 +83,21 @@ class Lastfm {
                         if (resultado.includes("/loved\""))
                             faixas_preferidas = resultado.split("/loved\"")[2].split("</a>")[0].replace(">", "").replace(/ /g, "").replace(/\n/g, "")
 
+                        const dados_user = {
+                            nome: nome,
+                            avatar: avatar,
+                            descricao: descricao,
+                            obsessao: obsessao,
+                            scrobble_atual: scrobble_atual,
+                            timestamp_entrada: criacao_conta,
+                            stats: {
+                                musicas_ouvidas: musicas_ouvidas,
+                                media_scrobbles: media_scrobbles,
+                                artistas_ouvidos: artistas_ouvidos,
+                                faixas_preferidas: faixas_preferidas
+                            }
+                        }
+
                         // Buscando histórico semanal do usuário
                         fetch(usuario_semanal)
                             .then(response => response.text())
@@ -146,22 +161,8 @@ class Lastfm {
 
                                         indicador_artista = regula_porcentagem(artistas_semanal, artistas_semana_passada, 0)
                                     }
-                                }
 
-                                const dados_user = {
-                                    nome: nome,
-                                    avatar: avatar,
-                                    descricao: descricao,
-                                    obsessao: obsessao,
-                                    scrobble_atual: scrobble_atual,
-                                    timestamp_entrada: criacao_conta,
-                                    stats: {
-                                        musicas_ouvidas: musicas_ouvidas,
-                                        media_scrobbles: media_scrobbles,
-                                        artistas_ouvidos: artistas_ouvidos,
-                                        faixas_preferidas: faixas_preferidas
-                                    },
-                                    week_stats: {
+                                    dados_user.week_stats = {
                                         album: {
                                             porcent: indicador_album,
                                             now: albuns_semanal,
