@@ -55,6 +55,10 @@ function retorna_games(res) {
             if (preco.length > 2) // Formatando o preço
                 preco = parseFloat(preco.substr(0, preco.length - 2) + "." + preco.substr(preco.length - 2, preco.length))
 
+            // Horário de expiração do jogo
+            let expiracao = jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.split("T")[1].split(".")[0]
+            expiracao = `${parseInt(expiracao.split(":")[0]) - 3}${expiracao.slice(2, 8)}`
+
             array_games.push({
                 nome: jogo.title,
                 preco: preco,
@@ -62,7 +66,8 @@ function retorna_games(res) {
                 thumbnail: thumbnail_game,
                 link: url_game,
                 inicia: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.slice(5, 10)),
-                expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10))
+                expira: formata_data(jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.slice(5, 10)),
+                hora_expira: expiracao
             })
         })
 
