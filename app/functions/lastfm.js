@@ -36,7 +36,7 @@ class Lastfm {
                     if (resultado.includes("Página não encontrada"))
                         return res.json({ status: "404" })
 
-                    let descricao, criacao_conta, avatar, nome, obsessao, musica_obsessao, artista_obsessao, media_scrobbles = 0, musicas_ouvidas = 0, artistas_ouvidos, faixas_preferidas = 0, scrobble_atual, scrobble_atual_curtido, scrobble_atual_cover
+                    let descricao, criacao_conta, avatar, nome, obsessao, musica_obsessao, artista_obsessao, media_scrobbles = 0, musicas_ouvidas = 0, artistas_ouvidos, faixas_preferidas = 0, scrobble_atual, scrobble_atual_curtido, scrobble_atual_cover, scrobble_atual_link
 
                     if (!resultado.includes("ainda não ouviu nenhuma música.")) {
                         if (convert.includes("<h2>Sobre mim</h2><p>")) {
@@ -66,6 +66,12 @@ class Lastfm {
                             scrobble_atual_curtido = convert.split("\"data-toggle-button-current-state=\"")[1].split("\"><spanclass=\"")[0] === "unloved" ? "🖤" : "💙"
 
                             scrobble_atual_cover = convert.split("<trclass=\"chartlist-rowchartlist-row--now-scrobblingchartlist-row")[1].split("\"alt=\"")[0].split("class=\"cover-art\"><imgsrc=\"")[1].replace("/u/64s/", "/u/1020s/")
+
+                            let corpo_ouvindo_agora = convert.split("<trclass=\"chartlist-rowchartlist-row--now-scrobblingchartlist-row")[1].split("class=\"cover-art\"><imgsrc=\"")[0]
+
+                            // Música atual possui link no youtube
+                            if (corpo_ouvindo_agora.includes("<aclass=\"chartlist-play-buttonjs-playlink\"href=\""))
+                                scrobble_atual_link = corpo_ouvindo_agora.split("<aclass=\"chartlist-play-buttonjs-playlink\"href=\"")[1].split("\"target=\"")[0].replace("www.youtube", "music.youtube")
                         }
 
                         // Média de músicas ouvidas p/ dia
@@ -91,7 +97,8 @@ class Lastfm {
                             scrobble_atual: {
                                 faixa: scrobble_atual,
                                 curtida: scrobble_atual_curtido,
-                                cover: scrobble_atual_cover
+                                cover: scrobble_atual_cover,
+                                link: scrobble_atual_link
                             },
                             timestamp_entrada: criacao_conta,
                             stats: {
