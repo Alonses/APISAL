@@ -36,12 +36,11 @@ class Lastfm {
                     if (resultado.includes("Página não encontrada"))
                         return res.json({ status: "404" })
 
-                    let descricao, criacao_conta, avatar, nome, obsessao, musica_obsessao, artista_obsessao, media_scrobbles = 0, musicas_ouvidas = 0, artistas_ouvidos, faixas_preferidas = 0, scrobble_atual
+                    let descricao, criacao_conta, avatar, nome, obsessao, musica_obsessao, artista_obsessao, media_scrobbles = 0, musicas_ouvidas = 0, artistas_ouvidos, faixas_preferidas = 0, scrobble_atual, scrobble_atual_curtido, scrobble_atual_cover
 
                     if (!resultado.includes("ainda não ouviu nenhuma música.")) {
-                        if (resultado.includes("<div class=\"about-me-header\">")) {
-                            descricao = resultado.split("<div class=\"about-me-header\">")[1].split("</p>")[0].replace("<p>", "").replace(/\n/g, "").trim()
-                            descricao = `${descricao.split("</span>")[0]}"`
+                        if (convert.includes("<h2>Sobre mim</h2><p>")) {
+                            descricao = convert.split("<h2>Sobre mim</h2><p>")[1].split("</p></section><section")[0]
                             descricao = formata_texto(descricao.replace(/\s{2,}/g, ' ').replace("\" ", "\""))
                         }
 
@@ -64,8 +63,9 @@ class Lastfm {
 
                             scrobble_atual = `${convert.split("<trclass=\"chartlist-rowchartlist-row--now-scrobblingchartlist-row")[1].split("data-track-name=\"")[1].split("\"data-track-url=\"")[0]} - ${convert.split("<trclass=\"chartlist-rowchartlist-row--now-scrobblingchartlist-row")[1].split("\"data-artist-name=\"")[1].split("\"data-artist-url=")[0]}`
 
-                            let musica_curtida = convert.split("\"data-toggle-button-current-state=\"")[1].split("\"><spanclass=\"")[0] === "unloved" ? "🖤 " : "💙 "
-                            scrobble_atual = `${musica_curtida}${scrobble_atual}`
+                            scrobble_atual_curtido = convert.split("\"data-toggle-button-current-state=\"")[1].split("\"><spanclass=\"")[0] === "unloved" ? "🖤" : "💙"
+
+                            scrobble_atual_cover = convert.split("<trclass=\"chartlist-rowchartlist-row--now-scrobblingchartlist-row")[1].split("\"alt=\"")[0].split("class=\"cover-art\"><imgsrc=\"")[1].replace("/u/64s/", "/u/1020s/")
                         }
 
                         // Média de músicas ouvidas p/ dia
@@ -88,7 +88,11 @@ class Lastfm {
                             avatar: avatar,
                             descricao: descricao,
                             obsessao: obsessao,
-                            scrobble_atual: scrobble_atual,
+                            scrobble_atual: {
+                                faixa: scrobble_atual,
+                                curtida: scrobble_atual_curtido,
+                                cover: scrobble_atual_cover
+                            },
                             timestamp_entrada: criacao_conta,
                             stats: {
                                 musicas_ouvidas: musicas_ouvidas,
@@ -165,23 +169,23 @@ class Lastfm {
                                     dados_user.week_stats = {
                                         album: {
                                             porcent: indicador_album,
-                                            now: albuns_semanal,
-                                            before: albuns_semana_passada
+                                            now: parseInt(albuns_semanal),
+                                            before: parseInt(albuns_semana_passada)
                                         },
                                         artistas: {
                                             porcent: indicador_artista,
-                                            now: artistas_semanal,
-                                            before: artistas_semana_passada
+                                            now: parseInt(artistas_semanal),
+                                            before: parseInt(artistas_semana_passada)
                                         },
                                         scrobbles: {
                                             porcent: indicador_scrobbles,
-                                            now: scrobbles_semanal,
-                                            before: scrobbles_semana_passada
+                                            now: parseInt(scrobbles_semanal),
+                                            before: parseInt(scrobbles_semana_passada)
                                         },
                                         media: {
                                             porcent: indicador_media,
-                                            now: media_semanal,
-                                            before: media_semana_passada
+                                            now: parseInt(media_semanal),
+                                            before: parseInt(media_semana_passada)
                                         },
                                         tempo: {
                                             porcent: indicador_tempo,
