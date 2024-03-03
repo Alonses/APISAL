@@ -109,6 +109,9 @@ class Lastfm {
                             }
                         }
 
+                        if (requisicao.now) // Retorna apenas os dados básicos do usuário
+                            return res.json(dados_user)
+
                         // Buscando histórico semanal do usuário
                         fetch(usuario_semanal)
                             .then(response => response.text())
