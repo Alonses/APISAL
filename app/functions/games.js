@@ -40,7 +40,7 @@ function retorna_games(res) {
             let tipo_conteudo = jogo.categories[0]["path"] === "bundles" ? "bundles" : "p"
             let url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.urlSlug}`
 
-            if (jogo.offerMappings.length > 0) // Jogo com url especificada em outra chave ( parte de um pacote )
+            if (jogo.offerMappings?.length > 0) // Jogo com url especificada em outra chave ( parte de um pacote )
                 url_game = `https://store.epicgames.com/pt-BR/${tipo_conteudo}/${jogo.offerMappings[0].pageSlug}`
 
             // Buscando a URL do game
@@ -73,6 +73,9 @@ function retorna_games(res) {
 
         return res.json(array_games)
     } catch (err) {
+
+        console.log(err)
+
         return res.json({ status: 501 })
     }
 }
