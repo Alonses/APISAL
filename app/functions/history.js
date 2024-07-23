@@ -34,7 +34,7 @@ class History {
             datas = [], fontes = [], ano_materias = [], acontecimento_final = []
             acontecimentos = []
 
-            fetch(`https://history.uol.com.br/hoje-na-historia/${data}`)
+            fetch(`https://www.canalhistory.com.br/hoje-na-historia/${data}`)
                 .then(response => response.text())
                 .then(async resultados => {
 
