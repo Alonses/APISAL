@@ -92,6 +92,7 @@ class Mine {
                                 renewable: lista_itens[i].renewable,
                                 stackable: lista_itens[i].stackable,
                                 craftable: lista_itens[i].renewable,
+                                released: lista_itens[i].released,
                                 type: lista_itens[i].type,
                                 hide: lista_itens[i].hide
                             },
