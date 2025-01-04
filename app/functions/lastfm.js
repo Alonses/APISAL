@@ -131,7 +131,7 @@ class Lastfm {
 
                                         scrobbles_semanal = semanal.split("<divclass=\"item\">Faixas<divclass=\"count\">")[1].split("</div>")[0]
 
-                                        scrobbles_semana_passada = semanal.split(`<divclass="item">Faixas<divclass="count">${scrobbles_semanal}</div><divclass="comparison"><divclass="comparison">versus.`)[1].split("(semanapassada)")[0]
+                                        scrobbles_semana_passada = semanal.split(`<divclass="item">Faixas<divclass="count">${scrobbles_semanal}</div><divclass="comparison">vs.`)[1].split("<br/>(semanapassada)")[0]
 
                                         indicador_scrobbles = regula_porcentagem(scrobbles_semanal, scrobbles_semana_passada, 0)
                                     }
@@ -141,7 +141,7 @@ class Lastfm {
 
                                         media_semanal = semanal.split("<divclass='quick-fact-data-value'>")[2].split("</div><divclass='")[0]
 
-                                        media_semana_passada = semanal.split(`<divclass='quick-fact-data-value'>${media_semanal}</div><divclass='quick-fact-data-detail'>/dia</div></div><pclass='quick-fact-comparison-text'>versus.`)[1].split("(semanapassada)")[0]
+                                        media_semana_passada = semanal.split(`<divclass='quick-fact-data-value'>${media_semanal}</div><divclass='quick-fact-data-detail'>/dia</div><spanclass="percentage-change">`)[1].split(`<pclass='quick-fact-comparison-text'>versus.`)[1].split(`(semanapassada)</p></div></div>`)[0]
 
                                         indicador_media = regula_porcentagem(media_semanal, media_semana_passada, 0)
                                     }
@@ -157,21 +157,21 @@ class Lastfm {
                                     }
 
                                     // Álbuns
-                                    if (semanal.includes("<divclass=\"item\">Álbuns<divclass=\"count\">")) {
+                                    if (semanal.includes(`</div><divclass="item">Álbuns<divclass="count">`)) {
 
-                                        albuns_semanal = semanal.split("<divclass=\"item\">Álbuns<divclass=\"count\">")[1].split("</div>")[0]
+                                        albuns_semanal = semanal.split(`</div><divclass="item">Álbuns<divclass="count">`)[1].split("</div>")[0]
 
-                                        albuns_semana_passada = semanal.split(`<divclass="item">Álbuns<divclass="count">${albuns_semanal}</div><divclass="comparison">versus.`)[1].split("(semanapassada)")[0]
+                                        albuns_semana_passada = semanal.split(`</div><divclass="item">Álbuns<divclass="count">${albuns_semanal}</div><divclass="comparison">vs.`)[1].split(`<br/>(semanapassada)`)[0]
 
                                         indicador_album = regula_porcentagem(albuns_semanal, albuns_semana_passada, 0)
                                     }
 
                                     // Artistas
-                                    if (semanal.includes("<divclass=\"item\">Artistas<divclass=\"count\">")) {
+                                    if (semanal.includes(`</div><divclass="item">Artistas<divclass="count">`)) {
 
-                                        artistas_semanal = semanal.split("<divclass=\"item\">Artistas<divclass=\"count\">")[1].split("</div>")[0]
+                                        artistas_semanal = semanal.split(`</div><divclass="item">Artistas<divclass="count">`)[1].split("</div>")[0]
 
-                                        artistas_semana_passada = semanal.split(`<divclass="item">Artistas<divclass="count">${artistas_semanal}</div><divclass="comparison"><divclass="comparison">versus.`)[1].split("(semanapassada)")[0]
+                                        artistas_semana_passada = semanal.split(`</div><divclass="item">Artistas<divclass="count">${artistas_semanal}</div><divclass="comparison">vs.`)[1].split("<br/>(semanapassada)")[0]
 
                                         indicador_artista = regula_porcentagem(artistas_semanal, artistas_semana_passada, 0)
                                     }
@@ -207,6 +207,10 @@ class Lastfm {
 
                                 return res.json(dados_user)
                             })
+                            .catch(err => {
+                                console.log(err)
+                                return res.json({ status: "402" })
+                            })
                     } else
                         return res.json({ status: "401" })
                 } catch (err) {
@@ -228,7 +232,9 @@ regula_porcentagem = (stats_semana, stats_passado, hora) => {
         if (stats_semana.includes("dia")) {
             hr_tempo = parseInt(stats_semana.split("dia")[0]) * 24
 
-            hr_tempo += parseInt(stats_semana.split(",")[1].split("hora")[0])
+            if (stats_semana.includes("hora"))
+                hr_tempo += parseInt(stats_semana.split(",")[1].split("hora")[0])
+
             stats_semana = hr_tempo
         } else // Apenas horas
             stats_semana = parseInt(stats_semana.split(" horas")[0])
@@ -237,7 +243,9 @@ regula_porcentagem = (stats_semana, stats_passado, hora) => {
         if (stats_passado.includes("dia")) {
             hr_tempo = parseInt(stats_passado.split("dia")[0]) * 24
 
-            hr_tempo += parseInt(stats_passado.split(",")[1].split("hora")[0])
+            if (stats_passado.includes("hora"))
+                hr_tempo += parseInt(stats_passado.split(",")[1].split("hora")[0])
+
             stats_passado = hr_tempo
         } else // Apenas horas
             stats_passado = parseInt(stats_passado.split(" horas")[0])
