@@ -36,6 +36,24 @@
             "minute": " minuto",
             "less_one_minute": "Menos de 1 minuto"
         },
+        "de": {
+            "clear": "Klares",
+            "raining": "Es regnet",
+            "drizzling": "Nieselregen",
+            "misty": "Misty",
+            "foggy": "Nebelig",
+            "hazy": "Dunstig",
+            "snowy": "Schneebedeckt",
+            "cloudy": "Wolkig",
+            "mostly_cloudy": "Überwiegend bewölkt",
+            "partly_cloudy": "Teilweise bewölkt",
+            "mostly_clear": "Überwiegend klar",
+            "hours": " std. ",
+            "hour": " stunde ",
+            "minutes": " minuten",
+            "minute": " minute",
+            "less_one_minute": "Weniger als 1 Minute"
+        },
         "es": {
             "clear": "Limpio",
             "raining": "Lloviendo",
