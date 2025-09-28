@@ -8,6 +8,9 @@ let data_anterior = ""
 class History {
     show(req, res) {
 
+        // Site fora do ar, interrompendo processamento
+        return res.json({ status: "404" })
+
         // Coletando os parâmetros da requisição
         const requisicao = req.query
         let data, dia, mes, idioma_definido = requisicao.lang || "pt-br", acontecimento = "lista"
