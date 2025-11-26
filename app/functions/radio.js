@@ -45,8 +45,6 @@ function sincroniza_tempo() {
     const tempo_agora = Math.floor(new Date().getTime() / 1000)
     let diferenca = tempo_agora - tocando.started
 
-    console.log(tocando.tempo + diferenca, tocando.music.duration, tocando.music.name)
-
     // Apenas quando a música acaba
     if ((tocando.tempo + diferenca) < tocando.music.duration)
         setTimeout(() => { sincroniza_tempo() }, 1000)
