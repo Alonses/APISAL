@@ -10,6 +10,7 @@ const Pula = require("./app/functions/pula")
 const GtaWeather = require("./app/functions/gtaweather")
 const Charadas = require('./app/functions/charadas')
 const Lastfm = require('./app/functions/lastfm')
+const Radio = require("./app/functions/radio")
 
 const routes = new Router()
 
@@ -23,5 +24,6 @@ routes.get('/pula', Pula.show)
 routes.get('/gta', GtaWeather.show)
 routes.get('/charadas', Charadas.show)
 routes.get('/lastfm', Lastfm.show)
+routes.get('/radio', Radio.show)
 
 module.exports = routes

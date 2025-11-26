@@ -6,6 +6,8 @@ const routes = require('./routes')
 
 const database = require('./app/database/database')
 
+const { select_random } = require('./app/functions/radio')
+
 class App {
     constructor() {
         this.app = express()
@@ -36,5 +38,6 @@ class App {
 }
 
 database.setup(process.env.url_dburi)
+select_random(true)
 
 module.exports = new App().app
