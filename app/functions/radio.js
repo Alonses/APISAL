@@ -5,13 +5,7 @@ const played = [], tocando = {}
 let montante = 0
 
 class Radio {
-    show(req, res) {
-
-        // Removendo metade a primeira metade do array após encher
-        if (played.length === musics.length) played = []
-
-        return res.json(tocando)
-    }
+    show(req, res) { return res.json(tocando) }
 }
 
 function select_random(start) {
@@ -51,8 +45,10 @@ function sincroniza_tempo() {
     const tempo_agora = Math.floor(new Date().getTime() / 1000)
     let diferenca = tempo_agora - tocando.started
 
+    console.log(tocando.tempo + diferenca, tocando.music.duration, tocando.music.name)
+
     // Apenas quando a música acaba
-    if ((tocando.music.duration - tocando.tempo - diferenca) > 0)
+    if ((tocando.tempo + diferenca) < tocando.music.duration)
         setTimeout(() => { sincroniza_tempo() }, 1000)
     else
         select_random()
