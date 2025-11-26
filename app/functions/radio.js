@@ -8,8 +8,7 @@ class Radio {
     show(req, res) {
 
         // Removendo metade a primeira metade do array após encher
-        if (played.length > Math.floor(musics.length / 2))
-            played.splice(0, Math.floor(musics.length / 2))
+        if (played.length === musics.length) played = []
 
         return res.json(tocando)
     }
