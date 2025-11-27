@@ -2,7 +2,7 @@ const musics = require("../database/musics.json")
 const props = require("../database/props.json")
 
 const played = [], tocando = {}
-let montante = 900, prop = false
+let montante = 0, prop = false
 
 class Radio {
     show(req, res) { return res.json(tocando) }
@@ -47,8 +47,11 @@ function sincroniza_tempo() {
     const tempo_agora = Math.floor(new Date().getTime() / 1000)
     let diferenca = tempo_agora - tocando.started
 
+    // Salvando o tempo atual da faixa
+    tocando.current = tocando.tempo + diferenca
+
     // Apenas quando a música acaba
-    if ((tocando.tempo + diferenca) < 15)
+    if ((tocando.tempo + diferenca) < tocando.music.duration)
         setTimeout(() => { sincroniza_tempo() }, 1000)
     else
         select_random()
