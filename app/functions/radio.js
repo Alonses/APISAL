@@ -28,6 +28,7 @@ function select_random(start) {
 
     if (!prop) played.push(track)
 
+    tocando.started = Math.floor(new Date().getTime() / 1000)
     tocando.music = montante > 1000 ? props[track] : musics[track]
 
     if (montante < 1000)
@@ -44,7 +45,7 @@ function select_random(start) {
 function sincroniza_tempo() {
 
     const tempo_agora = Math.floor(new Date().getTime() / 1000)
-    let diferenca = tempo_agora - tocando.started
+    const diferenca = tempo_agora - tocando.started
 
     // Salvando o tempo atual da faixa
     tocando.current = tocando.tempo + diferenca
