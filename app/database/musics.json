@@ -1,31 +1,37 @@
 [
     {
         "name": "Papers, Please",
+        "internal": "papers_please",
         "author": null,
         "duration": 114
     },
     {
         "name": "Sweden (synthwave80s)",
+        "internal": "sweden_C418_synthwave80s",
         "author": "C418",
         "duration": 245
     },
     {
         "name": "Joy Ride Turbo",
+        "internal": "joy_ride_turbo",
         "author": null,
         "duration": 71
     },
     {
         "name": "Bilada Circulation",
+        "internal": "bilada_circulation",
         "author": null,
         "duration": 107
     },
     {
         "name": "Música de Elevador",
+        "internal": "musica_elevador",
         "author": null,
         "duration": 189
     },
     {
         "name": "Música tema do jaja",
+        "internal": "musica_tema_jaja",
         "author": null,
         "duration": 259
     }

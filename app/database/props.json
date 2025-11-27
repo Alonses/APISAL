@@ -1,18 +1,21 @@
 [
     {
         "name": "Renato's lanches",
+        "internal": "renatos_lanches",
         "author": "Jaba Alonsal 👽",
         "type": 1,
         "duration": 31
     },
     {
         "name": "Roda a rol@",
+        "internal": "roda_rola",
         "author": "Jaba Alonsal 👽",
         "type": 1,
         "duration": 20
     },
     {
         "name": "Gemidão do almoço",
+        "internal": "gemidao_almoco",
         "author": "Jaba Alonsal 👽",
         "duration": 5
     }
