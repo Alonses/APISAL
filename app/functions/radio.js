@@ -2,7 +2,7 @@ const musics = require("../database/musics.json")
 const props = require("../database/props.json")
 
 const played = [], tocando = {}
-let montante = 0
+let montante = 900, prop = false
 
 class Radio {
     show(req, res) { return res.json(tocando) }
@@ -11,22 +11,22 @@ class Radio {
 function select_random(start) {
 
     // Removendo metade a primeira metade do array após encher
-    if (played.length > Math.floor(musics.length / 2))
-        played.splice(0, Math.floor(musics.length / 2))
+    if (played.length > Math.round(musics.length * 0.70))
+        played.splice(0, Math.round(musics.length * 0.30))
 
-    if (montante > 1000) {
+    if (montante >= 1000) {
         track = Math.floor(Math.random() * props.length)
+        prop = true
     } else
         do {
             track = Math.floor(Math.random() * musics.length)
         } while (played.includes(track))
 
-    if (montante > 1000)
-        played.push(track)
-
     // Verificando se foi uma requisição automática para iniciar com um tempo aleatório
     if (start) tocando.tempo = Math.floor(Math.random() * (montante > 1000 ? props[track].duration : musics[track].duration))
     else tocando.tempo = 0
+
+    if (!prop) played.push(track)
 
     tocando.started = Math.floor(new Date().getTime() / 1000)
     tocando.music = montante > 1000 ? props[track] : musics[track]
@@ -34,8 +34,10 @@ function select_random(start) {
     if (montante < 1000)
         montante += musics[track].duration
 
-    // Reinicando contagem da propaganda
-    if (montante > 1000) montante = 0
+    if (prop) {
+        prop = false
+        montante = 0
+    }
 
     sincroniza_tempo()
 }
@@ -46,7 +48,7 @@ function sincroniza_tempo() {
     let diferenca = tempo_agora - tocando.started
 
     // Apenas quando a música acaba
-    if ((tocando.tempo + diferenca) < tocando.music.duration)
+    if ((tocando.tempo + diferenca) < 15)
         setTimeout(() => { sincroniza_tempo() }, 1000)
     else
         select_random()
