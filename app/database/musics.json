@@ -18,10 +18,10 @@
         "duration": 71
     },
     {
-        "name": "Bilada Circulation",
-        "internal": "bilada_circulation",
-        "author": null,
-        "duration": 107
+        "name": "Kraftwagen",
+        "internal": "kraftwagen",
+        "author": "Admiral James T.",
+        "duration": 226
     },
     {
         "name": "Música de Elevador",
@@ -33,6 +33,6 @@
         "name": "Música tema do jaja",
         "internal": "musica_tema_jaja",
         "author": null,
-        "duration": 259
+        "duration": 227
     }
 ]

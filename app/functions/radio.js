@@ -51,10 +51,9 @@ function sincroniza_tempo() {
     tocando.current = tocando.tempo + diferenca
 
     // Apenas quando a música acaba
-    if ((tocando.tempo + diferenca) < tocando.music.duration)
+    if ((tocando.tempo + diferenca) < (tocando.music.duration + 1))
         setTimeout(() => { sincroniza_tempo() }, 1000)
-    else
-        select_random()
+    else select_random()
 }
 
 module.exports = new Radio()
